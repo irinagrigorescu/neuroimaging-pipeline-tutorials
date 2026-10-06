@@ -5,5 +5,7 @@
 - **Date modified**: 2026-10-06
 
 Jump to section:
-- [Introduction](./surfaces.md) - Introduction to surfaces
+- [Introduction](./surfaces.md) - What is a surface and why use one?
+- [Introduction](./surfaces.md) - Why Surfaces?
+
 
