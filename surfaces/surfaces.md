@@ -29,6 +29,12 @@ You will need:
 
 ## 1. What Is a Cortical Surface?
 
+A mesh is a digital framework that defines the the geometric structure of a 3D object.
+
+![The elements of a mesh](./images/0mesh.png)
+*Figure 1. The elements of a mesh.*
+
+
 ## 2. Why Use Surfaces?
 
 ## 3. How Are Surfaces Represented?
