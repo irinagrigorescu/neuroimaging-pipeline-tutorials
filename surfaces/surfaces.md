@@ -19,6 +19,7 @@ You will need:
 
 ## Contents
 
+0. [What Is a Mesh?](#0-what-is-a-mesh)
 1. [What Is a Cortical Surface?](#1-what-is-a-cortical-surface)
 2. [Why Use Surfaces?](#2-why-use-surfaces)
 3. [How Are Surfaces Represented?](#3-how-are-surfaces-represented)
@@ -27,13 +28,33 @@ You will need:
 6. [From Individual Surfaces to Group Analysis](#6-from-individual-surfaces-to-group-analysis)
 7. [Further Reading](#7-further-reading)
 
-## 1. What Is a Cortical Surface?
+## 0. What Is a Mesh?
 
-A mesh is a digital framework that defines the the geometric structure of a 3D object.
+A mesh is a digital framework that defines the geometric structure of a 3D object.
 
 ![The elements of a mesh](./images/0mesh.png)
-*Figure 1. The elements of a mesh.*
 
+Surface meshes: 
+* Are composed of 2D polygons.
+* They define the boundary of an organ of interest.
+* They are generally represented as a closed 2D manifold topologically equivalent to a sphere.
+
+Volume meshes:
+* Are composed of 3D polyhedra.
+* They fill the entire inside of an object.
+
+In this tutorial we will only be concerned with **triangular surface meshes** that define the **enclosed boundary of the brain**.
+
+## 1. What Is a Cortical Surface?
+
+A cortical surface is a 3D representation of a boundary of the cerebral cortex.
+Unlike an MRI volume, which represents the brain as a grid of voxels, a surface follows the shape of that boundary using connected triangles.
+
+Two commonly reconstructed cortical boundaries are:
+- **White matter** surface: the boundary between cortical grey matter and the underlying white matter.
+- **Pial* surface: the outer boundary of the cortex, adjacent to cerebrospinal fluid.
+
+Together, these surfaces describe the cortical ribbon: the layer of cortical grey matter between them.
 
 ## 2. Why Use Surfaces?
 
