@@ -44,6 +44,10 @@ Volume meshes:
 * They fill the entire inside of an object.
 
 In this tutorial we will only be concerned with **triangular surface meshes** that define the **enclosed boundary of the brain**.
+And to make it even more clear, I am showing you below what exactly is stored under the hood in one of these surfaces.
+Specifically, surfaces are made up of VERTICES (N vertices where each vertex has x-/y-/z- coordinates) and FACES (M faces where each face is made up of the vertex indices that are connected to make up a triangle).
+
+![How our surfaces look like under the hood](./images/1mesh.png)
 
 ## 1. What Is a Cortical Surface?
 
@@ -52,7 +56,7 @@ Unlike an MRI volume, which represents the brain as a grid of voxels, a surface 
 
 Two commonly reconstructed cortical boundaries are:
 - **White matter** surface: the boundary between cortical grey matter and the underlying white matter.
-- **Pial* surface: the outer boundary of the cortex, adjacent to cerebrospinal fluid.
+- **Pial** surface: the outer boundary of the cortex, adjacent to cerebrospinal fluid.
 
 Together, these surfaces describe the cortical ribbon: the layer of cortical grey matter between them.
 
