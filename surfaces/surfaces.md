@@ -30,8 +30,8 @@ You will need:
 
 ## 1. What Is a Cortical Surface?
 
-A cortical surface is a 3D representation of a boundary of the cerebral cortex.
-Unlike an MRI volume, which represents the brain as a grid of voxels, a surface follows the shape of that boundary using connected triangles.
+A cortical surface is a 3D representation of a boundary of the cerebral cortex. 
+Unlike an MRI volume, which represents the brain as a grid of voxels, a surface follows that boundary using a mesh of interconnected points.
 
 Two commonly reconstructed cortical boundaries are:
 - **White matter** surface: the boundary between cortical grey matter and the underlying white matter.
@@ -166,9 +166,6 @@ guarantee that they belong together.
 
 ![Surface geometries and vertex-wise maps: white matter, pial, midthickness, inflated, very inflated, sphere, sulcal depth, curvature, thickness, and ROIs](./images/1corticalsurfaces.png)
 
-*Figure. Examples of cortical surface geometries and vertex-wise maps.
-Geometry determines the shape of the mesh; maps supply the values or
-labels used to colour it.*
 
 ## 4. Exploring Surfaces in Connectome Workbench
 
