@@ -44,8 +44,11 @@ Volume meshes:
 * They fill the entire inside of an object.
 
 In this tutorial we will only be concerned with **triangular surface meshes** that define the **enclosed boundary of the brain**.
-And to make it even more clear, I am showing you below what exactly is stored under the hood in one of these surfaces.
-Specifically, surfaces are made up of VERTICES (N vertices where each vertex has x-/y-/z- coordinates) and FACES (M faces where each face is made up of the vertex indices that are connected to make up a triangle).
+And to make it even more clear, I am showing you below what exactly is stored under the hood in one of these surface files.
+
+Specifically, surfaces are made up of:
+* VERTICES: N vertices where each vertex has x-/y-/z- coordinates and 
+* FACES: M faces where each face is made up of the indices of the nodes that are connected to make up a triangle.
 
 ![How our surfaces look like under the hood](./images/1mesh.png)
 
@@ -59,6 +62,10 @@ Two commonly reconstructed cortical boundaries are:
 - **Pial** surface: the outer boundary of the cortex, adjacent to cerebrospinal fluid.
 
 Together, these surfaces describe the cortical ribbon: the layer of cortical grey matter between them.
+
+![Volumetric vs. surface-based representations](./images/0corticalsurface.png)
+
+![Different types of surfaces](./images/1corticalsurfaces.png)
 
 ## 2. Why Use Surfaces?
 
