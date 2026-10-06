@@ -7,12 +7,13 @@ This collection of practical tutorials is designed to take you from raw volumetr
 
 This repository contains a collection of practical tutorials, code snippets, and examples for neuroimaging workflows used in our research group.
 
-- **Authors**: Irina Grigorescu
-- **Date Created**: 2026-10-06
+## Tutorials
 
-### Introduction to Surfaces
-[Surfaces](./surfaces/surfaces.md)
+### Cortical Surfaces: Introduction, Visualisation, and Quality Control
+Learn how cortical surfaces are represented, explore them in Connectome
+Workbench, and assess reconstruction quality.
 
+[Open the surfaces tutorial](./surfaces/surfaces.md)
 
 ---
 
