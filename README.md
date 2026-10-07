@@ -9,6 +9,11 @@ This repository contains a collection of practical tutorials, code snippets, and
 
 ## Tutorials
 
+### Volumetric analysis TBD title
+TBD short description
+
+TBD link to tutorial
+
 ### Cortical Surfaces: Introduction, Visualisation, and Quality Control
 Learn how cortical surfaces are represented, explore them in Connectome
 Workbench, and assess reconstruction quality.
