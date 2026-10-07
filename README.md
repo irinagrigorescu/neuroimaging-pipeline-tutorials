@@ -18,7 +18,7 @@ Workbench, and assess reconstruction quality.
 ### Statistical Analysis for Cortical Surfaces
 TBD
 
-[Open the statistical analysis for surfaces tutorial](./surface-stats/surface-statsi.md)
+[Open the statistical analysis for surfaces tutorial](./surface-stats/surface-stats.md)
 
 
 ---
