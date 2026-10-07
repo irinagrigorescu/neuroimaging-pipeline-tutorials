@@ -18,7 +18,9 @@ Workbench, and assess reconstruction quality.
 ---
 
 ## 👥 Authors
+*   **Renato Besenczi**
 *   **Irina Grigorescu** 
+*   **Kaili Liang** 
 
 *Last Updated: October 2026*
 
