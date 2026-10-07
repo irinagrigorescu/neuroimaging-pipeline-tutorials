@@ -13,8 +13,13 @@ This repository contains a collection of practical tutorials, code snippets, and
 Learn how cortical surfaces are represented, explore them in Connectome
 Workbench, and assess reconstruction quality.
 
-*    [Open the surfaces tutorial](./surfaces/surfaces.md)
-*    [Open the statistical analysis for surfaces tutorial](./surface-stats/surface-statsi.md)
+[Open the surfaces tutorial](./surfaces/surfaces.md)
+
+### Statistical Analysis for Cortical Surfaces
+TBD
+
+[Open the statistical analysis for surfaces tutorial](./surface-stats/surface-statsi.md)
+
 
 ---
 
