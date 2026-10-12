@@ -10,9 +10,9 @@ This repository contains a collection of practical tutorials, code snippets, and
 ## Tutorials
 
 ### Volumetric analysis TBD title
-TBD short description
+Learn the basic image processing tools for volumetric MRI analysis.
 
-TBD link to tutorial
+[Open the image processing tutorial](./image_processing/imag_proc.md)
 
 ### Cortical Surfaces: Introduction, Visualisation, and Quality Control
 Learn how cortical surfaces are represented, explore them in Connectome
