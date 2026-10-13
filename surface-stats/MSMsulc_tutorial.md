@@ -87,8 +87,8 @@ Neonatal registration requires additional consideration because cortical folding
 
 Here, we use a **two-step registration**:
 
-1. Register the individual neonate to an age-matched template (week 43).
-2. Combine this registration with a pre-generated week-43-to-week-40 transformation to obtain a registered sphere in the common dHCP week-40 template space.
+1. Register the individual neonate to an age-matched template (the provided neonatal data were scanned at 43 weeks).
+2. Combine this registration with a pre-generated week43-to-week40 transformation to obtain a registered sphere in the common dHCP week40 template space.
 
 ![Neonatal registration workflow](images/MSMsulc_neonatal_workflow.png)
 
@@ -109,7 +109,7 @@ newmsm --conf=./data/MSMsulc/config_MSMsulc \
        --out=./data/MSMsulc/neo_MSMsulc_output/left.neo.
 ```
 
-**QC:** Inspect the registered sulcal depth map against the week-43 reference, as in Practice 1.
+**QC:** Inspect the registered sulcal depth map against the week43 template, as in Practice 1.
 
 **Step 2. Combine the registration with the week-43-to-week-40 transformation**
 
@@ -127,9 +127,9 @@ wb_command -surface-sphere-project-unproject \
 
 | Argument | Description |
 |---|---|
-| left.neo.sphere.reg.surf.gii | Individual sphere registered to week 43 |
-| week43_left_LR.32k.sphere.surf.gii | Week-43 reference sphere |
-| dHCPtemplate_left_week43To40.sphere.reg.surf.gii | Week-43 sphere registered to week 40 |
-| left.neo.sphere.regToweek40.surf.gii | Output sphere registered to week 40 |
+| left.neo.sphere.reg.surf.gii | Individual sphere registered to week43 |
+| week43_left_LR.32k.sphere.surf.gii | Week43 template sphere |
+| dHCPtemplate_left_week43To40.sphere.reg.surf.gii | Week43 sphere registered to week40 |
+| left.neo.sphere.regToweek40.surf.gii | Output sphere registered to week40 |
 
-**Final output:** `left.neo.sphere.regToweek40.surf.gii`. This sphere combines the native-to-week-43 and week-43-to-week-40 transformations, allowing the neonatal surface data to be resampled into the common week-40 template space.
+**Final output:** `left.neo.sphere.regToweek40.surf.gii`. This sphere combines the native-to-week43 and week43-to-week40 transformations, allowing the neonatal surface data to be resampled into the common week40 template space.
