@@ -30,7 +30,6 @@ In the field of neuroimaging, many commonly used neuroimaging pipelines follow H
 
 ## 3. Practical exercises
 
-**Aims:**
 1. Run MSMSulc registration on childhood and neonatal data.
 2. Perform visual quality control (QC) of the registration.
 
