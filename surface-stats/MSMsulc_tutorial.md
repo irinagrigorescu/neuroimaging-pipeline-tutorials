@@ -50,8 +50,6 @@ HCP templates are also available [here](https://github.com/Washington-University
 **Run MSMSulc:**
 
 ```bash
-mkdir -p ./data/MSMsulc/child_MSMsulc_output
-
 newmsm --conf=./data/MSMsulc/config_MSMsulc \
        --indata=./data/MSMsulc/child.L.sulc.native.shape.gii \
        --inmesh=./data/MSMsulc/child.L.sphere.rot.native.surf.gii \
@@ -99,8 +97,6 @@ Two-step neonatal registration: individual native sphere → week43 template →
 Age-specific templates are provided in: `./data/MSMsulc/neonatal_template/LR_week_templates/`
 
 ```bash
-mkdir -p ./data/MSMsulc/neo_MSMsulc_output
-
 newmsm --conf=./data/MSMsulc/config_MSMsulc \
        --indata=./data/MSMsulc/neonateWeek43_hemi-left_sulc.shape.gii \
        --inmesh=./data/MSMsulc/neonateWeek43_hemi-left_sphere.rot.surf.gii \
