@@ -97,9 +97,7 @@ Two-step neonatal registration: individual native sphere → week43 template →
 
 **Step 1. Register the neonate to the week-43 template**
 
-Age-specific templates are provided in:
-
-`./data/MSMsulc/neonatal_template/LR_week_templates/`
+Age-specific templates are provided in: `./data/MSMsulc/neonatal_template/LR_week_templates/`
 
 ```bash
 mkdir -p ./data/MSMsulc/neo_MSMsulc_output
@@ -116,9 +114,7 @@ newmsm --conf=./data/MSMsulc/config_MSMsulc \
 
 **Step 2. Combine the registration with the week-43-to-week-40 transformation**
 
-The pre-generated template-to-template registration is provided in:
-
-`./data/MSMsulc/neonatal_template/template_to_template/`
+The pre-generated template-to-template registration is provided in: `./data/MSMsulc/neonatal_template/template_to_template/`
 
 ```bash
 wb_command -surface-sphere-project-unproject \
@@ -132,13 +128,9 @@ wb_command -surface-sphere-project-unproject \
 
 | Argument | Description |
 |---|---|
-| 1 | Individual sphere registered to week 43 |
-| 2 | Week-43 reference sphere |
-| 3 | Week-43 sphere registered to week 40 |
-| 4 | Output sphere registered to week 40 |
+| left.neo.sphere.reg.surf.gii | Individual sphere registered to week 43 |
+| week43_left_LR.32k.sphere.surf.gii | Week-43 reference sphere |
+| dHCPtemplate_left_week43To40.sphere.reg.surf.gii | Week-43 sphere registered to week 40 |
+| left.neo.sphere.regToweek40.surf.gii | Output sphere registered to week 40 |
 
-**Final output:**
-
-`left.neo.sphere.regToweek40.surf.gii`
-
-This sphere combines the native-to-week-43 and week-43-to-week-40 transformations, allowing the neonatal surface data to be resampled into the common week-40 template space.
+**Final output:** `left.neo.sphere.regToweek40.surf.gii`. This sphere combines the native-to-week-43 and week-43-to-week-40 transformations, allowing the neonatal surface data to be resampled into the common week-40 template space.
