@@ -128,3 +128,16 @@ wb_command -surface-sphere-project-unproject \
 | left.neo.sphere.regToweek40.surf.gii | Output sphere registered to week40 |
 
 **Final output:** `left.neo.sphere.regToweek40.surf.gii`. This sphere combines the native-to-week43 and week43-to-week40 transformations, allowing the neonatal surface data to be resampled into the common week40 template space.
+
+
+### Other MSM Registration Variants: aMSM, group-wise MSM and MSMALL
+
+**aMSM (anatomical MSM):** Used for within-individual longitudinal surface registration, such as aligning fetal to neonatal, or neonatal to childhood cortical surfaces.
+
+**Group-wise MSM:** Registers individuals to a series of templates to better preserve individual variability during registration.
+
+**MSMAll:** Uses multiple features, including myelin maps and functional features, to improve cortical surface registration.
+
+**to check here for more details:** https://fsl.fmrib.ox.ac.uk/fsl/docs/registration/newmsm/guide.html
+
+
