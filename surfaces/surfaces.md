@@ -211,7 +211,7 @@ Which regions are easier to inspect on the inflated surface? What anatomical inf
 1. Load the supplied curvature or sulcal depth map and select it in the overlay controls.
 2. Inspect the colour bar before interpreting the image. Check which measurement is displayed, its units where applicable, and the range represented by the colours.
 3. Find a region with relatively high values and one with relatively low values. Switch between anatomical and inflated surfaces while displaying the same map.
-4. Let's repeat the same steps for `wb_view subject-2/tutorial-2.wb.spec` (43.4w) and try to use the sphere as well.
+4. Let's repeat the same steps for `wb_view subject-2/tutorial-2.wb.spec` (33.4w) and try to use the sphere as well.
 
 ## 5. Checking Surface Quality
 
