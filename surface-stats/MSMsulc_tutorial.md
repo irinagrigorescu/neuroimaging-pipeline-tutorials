@@ -65,15 +65,14 @@ The main outputs include:
 | Output | Description |
 |---|---|
 | `left.child.sphere.LR.reg.surf.gii` | Registered sphere in reference spherical coordinates |
-| `left.child.sphere.reg.surf.gii` | Registered native sphere, used to resample cortical surfaces and metrics |
-| `left.child.transformed_and_reprojected.func.gii` | Registered sulcal depth map, useful for registration QC |
+| **`left.child.sphere.reg.surf.gii`** | Registered native sphere, used to **resample cortical surfaces and metrics** |
+| **`left.child.transformed_and_reprojected.func.gii`** | Registered sulcal depth map, useful for **registration QC** |
 
 **Visual QC:**
 
 Open the registered sulcal depth map and reference sulcal depth map in Connectome Workbench. Check whether major sulci and gyri are well aligned.
 
-**Further tutorial:** [Connectome Workbench: Surface/metrics resampling](https://www.youtube.com/watch?v=IA4j3Md-2CQ&list=PLc95HdN2_wt9UEjeDDFF1bdRHDKzcsW4b&index=3)
-
+**Tutorial on how to apply registration to surface meshes and metrics:** [Connectome Workbench: Surface/metrics resampling](https://www.youtube.com/watch?v=IA4j3Md-2CQ&list=PLc95HdN2_wt9UEjeDDFF1bdRHDKzcsW4b&index=3)
 This video introduces useful commands:
 - `wb_command -surface-resample`: Resample cortical surface meshes.
 - `wb_command -metric-resample`: Resample cortical metrics.
