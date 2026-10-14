@@ -169,6 +169,48 @@ guarantee that they belong together.
 
 ## 4. Exploring Surfaces in Connectome Workbench
 
+Connectome Workbench provides tools for viewing neuroimaging data. In this tutorial, we use wb_view, its graphical viewer, to explore cortical surfaces and the measurements displayed on them.
+
+### Launch the viewer
+
+Open a terminal and run:
+
+`wb_view`
+
+Or, more simply, open using a specification file:
+
+`wb_view tutorial.wb.spec`
+
+A specification file contains references to the data files that are to be open:
+`<?xml version='1.0' encoding='UTF-8'?>`
+`<CaretSpecFile Version="1.0">`
+`   <MetaData />`
+`   <DataFile Structure="CortexLeft" DataFileType="SURFACE" Selected="true">sub-CC00909XX18_ses-16731_pred_left_white.surf.gii</DataFile>`
+`   ...`   
+`   <DataFile Structure="CortexLeft" DataFileType="METRIC" Selected="true">sub-CC00909XX18_ses-16731_pred_left_thickness.shape.gii</DataFile>`
+`   ...`   
+`   <DataFile Structure="Invalid" DataFileType="VOLUME" Selected="true">sub-CC00909XX18_ses-16731_T2w.nii.gz</DataFile>`
+`</CaretSpecFile>`
+
+### Explore the surface
+
+Using File → Open, load the supplied surface files. Select the white matter surface and inspect it from different directions.
+
+Try it:
+1. Rotate the surface and zoom into a sulcus.
+2. Inspect lateral and medial views.
+3. Switch between the white matter and pial surfaces.
+4. Switch to the inflated surface.
+
+#### Think about:
+Which regions are easier to inspect on the inflated surface? What anatomical information is clearer on the original surface?
+
+#### Display a surface map
+1. Load the supplied thickness or sulcal depth map and select it in the overlay controls.
+2. Inspect the colour bar before interpreting the image. Check which measurement is displayed, its units where applicable, and the range represented by the colours.
+3. Find a region with relatively high values and one with relatively low values. Switch between anatomical and inflated surfaces while displaying the same map.
+
+
 ## 5. Checking Surface Quality
 
 ## 6. From Individual Surfaces to Group Analysis
