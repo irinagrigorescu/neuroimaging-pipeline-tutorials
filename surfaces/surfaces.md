@@ -179,18 +179,18 @@ Open a terminal and run:
 
 Or, more simply, open using a specification file:
 
-`wb_view tutorial.wb.spec`
+`wb_view subject-1/tutorial-1.wb.spec` (29.7w)
 
 A specification file contains references to the data files that are to be open:
 ```xml
 <?xml version='1.0' encoding='UTF-8'?>
 <CaretSpecFile Version="1.0">
    <MetaData />
-   <DataFile Structure="CortexLeft" DataFileType="SURFACE" Selected="true">sub-CC00909XX18_ses-16731_pred_left_white.surf.gii</DataFile>
+   <DataFile Structure="CortexLeft" DataFileType="SURFACE" Selected="true">SUBJECT_ID_left_white.surf.gii</DataFile>
    ...   
-   <DataFile Structure="CortexLeft" DataFileType="METRIC" Selected="true">sub-CC00909XX18_ses-16731_pred_left_thickness.shape.gii</DataFile>
+   <DataFile Structure="CortexLeft" DataFileType="METRIC" Selected="true">SUBJECT_ID_left_thickness.shape.gii</DataFile>
    ...   
-   <DataFile Structure="Invalid" DataFileType="VOLUME" Selected="true">sub-CC00909XX18_ses-16731_T2w.nii.gz</DataFile>
+   <DataFile Structure="Invalid" DataFileType="VOLUME" Selected="true">SUBJECT_ID_T2w.nii.gz</DataFile>
 </CaretSpecFile>
 ```
 
@@ -208,10 +208,10 @@ Try it:
 Which regions are easier to inspect on the inflated surface? What anatomical information is clearer on the original surface?
 
 #### Display a surface map
-1. Load the supplied thickness or sulcal depth map and select it in the overlay controls.
+1. Load the supplied curvature or sulcal depth map and select it in the overlay controls.
 2. Inspect the colour bar before interpreting the image. Check which measurement is displayed, its units where applicable, and the range represented by the colours.
 3. Find a region with relatively high values and one with relatively low values. Switch between anatomical and inflated surfaces while displaying the same map.
-
+4. Let's repeat the same steps for `wb_view subject-2/tutorial-2.wb.spec` (43.4w) and try to use the sphere as well.
 
 ## 5. Checking Surface Quality
 
