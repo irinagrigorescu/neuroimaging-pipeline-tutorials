@@ -92,7 +92,7 @@ Here, we use a **two-step registration**:
 
 Two-step neonatal registration: individual native sphere → week43 template → week40 template.
 
-**Step 1. Register the neonate to the week-43 template**
+**Step 1. Register the neonate to the week43 template**
 
 Age-specific templates are provided in: `./data/MSMsulc/neonatal_template/LR_week_templates/`
 
@@ -107,7 +107,7 @@ newmsm --conf=./data/MSMsulc/config_MSMsulc \
 
 **QC:** Inspect the registered sulcal depth map against the week43 template, as in Practice 1.
 
-**Step 2. Combine the registration with the week-43-to-week-40 transformation**
+**Step 2. Combine the registration with the week43-to-week40 transformation**
 
 The pre-generated template-to-template registration is provided in: `./data/MSMsulc/neonatal_template/template_to_template/`
 
