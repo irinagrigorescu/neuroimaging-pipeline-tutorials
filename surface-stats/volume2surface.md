@@ -27,7 +27,7 @@ One important thing to know is that **diffusion and functional MRI are usually a
 
 This tutorial won't focus on dMRI/fMRI preprocessing, but here are some useful references and links to commonly used preprocessing pipelines. One thing to keep in mind is that **neonatal MRI data usually require different preprocessing pipelines from childhood and adult data**, due to differences in brain development and imaging characteristics. The pipelines listed below are widely used in neuroimaging research. They follow broadly similar principles but may differ in specific processing steps. The choice of pipeline depends on your data and research needs.
 
-#### 1. sMRI
+### 1. sMRI
 
 **Neonates:**
 
@@ -42,7 +42,7 @@ This tutorial won't focus on dMRI/fMRI preprocessing, but here are some useful r
 - **FreeSurfer (`recon-all`):** surface reconstruction and feature generation [https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all](https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all)
 - **ciftify:** to convert freesurfer outputs to HCP-style outputs for visualization and surface registration [https://edickie.github.io/ciftify/#/](https://edickie.github.io/ciftify/#/)
 
-#### 2. dMRI
+### 2. dMRI
 
 **Neonates:**
 
@@ -59,7 +59,7 @@ This tutorial won't focus on dMRI/fMRI preprocessing, but here are some useful r
 - **FSL TOPUP/EDDY:** [https://fsl.fmrib.ox.ac.uk/fsl/docs/diffusion/index.html](https://fsl.fmrib.ox.ac.uk/fsl/docs/diffusion/index.html)
 - **MRtrix SHARD reconstruction:** [https://github.com/dchristiaens/shard-recon](https://github.com/dchristiaens/shard-recon)
 
-#### 3. fMRI
+### 3. fMRI
 
 **Neonates:**
 
