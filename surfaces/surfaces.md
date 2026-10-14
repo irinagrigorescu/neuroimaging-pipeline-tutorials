@@ -182,15 +182,15 @@ Or, more simply, open using a specification file:
 `wb_view tutorial.wb.spec`
 
 A specification file contains references to the data files that are to be open:
-`<?xml version='1.0' encoding='UTF-8'?>`
-`<CaretSpecFile Version="1.0">`
-`   <MetaData />`
-`   <DataFile Structure="CortexLeft" DataFileType="SURFACE" Selected="true">sub-CC00909XX18_ses-16731_pred_left_white.surf.gii</DataFile>`
-`   ...`   
-`   <DataFile Structure="CortexLeft" DataFileType="METRIC" Selected="true">sub-CC00909XX18_ses-16731_pred_left_thickness.shape.gii</DataFile>`
-`   ...`   
-`   <DataFile Structure="Invalid" DataFileType="VOLUME" Selected="true">sub-CC00909XX18_ses-16731_T2w.nii.gz</DataFile>`
-`</CaretSpecFile>`
+`<?xml version='1.0' encoding='UTF-8'?>
+<CaretSpecFile Version="1.0">
+   <MetaData />
+   <DataFile Structure="CortexLeft" DataFileType="SURFACE" Selected="true">sub-CC00909XX18_ses-16731_pred_left_white.surf.gii</DataFile>
+   ...   
+   <DataFile Structure="CortexLeft" DataFileType="METRIC" Selected="true">sub-CC00909XX18_ses-16731_pred_left_thickness.shape.gii</DataFile>
+   ...   
+   <DataFile Structure="Invalid" DataFileType="VOLUME" Selected="true">sub-CC00909XX18_ses-16731_T2w.nii.gz</DataFile>
+</CaretSpecFile>`
 
 ### Explore the surface
 
