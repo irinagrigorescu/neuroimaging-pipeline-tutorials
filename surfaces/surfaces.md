@@ -409,14 +409,14 @@ cortical boundary and establishing correspondence across subjects are
 separate tasks.
 
 Surface registration is commonly performed using spherical
-representations. It estimates a mapping between cortical locations;
-resampling then uses that mapping to transfer surface geometry,
+representations. It estimates a mapping between cortical locations,
+then uses that mapping to transfer surface geometry,
 measurements, or labels onto a common mesh.
 
 ### From Correspondence to Statistical Analysis
 
 Once measurements are represented at corresponding cortical locations,
-we can perform vertex-wise analyses—for example, testing associations
+we can perform vertex-wise analyses; for example, testing associations
 between cortical thickness and age or differences between groups.
 
 Additional processing, such as surface smoothing or applying a common
