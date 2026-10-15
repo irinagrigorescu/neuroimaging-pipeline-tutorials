@@ -39,7 +39,7 @@ Two commonly reconstructed cortical boundaries are:
 
 Together, these surfaces describe the cortical ribbon: the layer of cortical grey matter between them.
 
-![Volumetric vs. surface-based representations](./images/0corticalsurface.png)
+![Volumetric vs. surface-based representations](./images/0surface-and-volume.png)
 
 ## 2. Why Use Surfaces?
 
@@ -77,7 +77,7 @@ elements. There are two main types:
 - **Volume meshes** represent an object's interior using three-dimensional
   elements, such as tetrahedra or hexahedra.
 
-![The elements of a mesh](./images/0mesh.png)
+![The elements of a mesh](./images/2mesh-elements.png)
 
 In this tutorial, we focus on **triangular surface meshes** representing 
 the boundaries of each cerebral hemisphere.
@@ -106,7 +106,7 @@ The vertex coordinates determine the surface's shape, while the faces
 determine its connectivity. Changing the coordinates while keeping the
 faces fixed deforms the mesh without changing which vertices are connected.
 
-![Coordinates and connectivity stored in a surface file](./images/1mesh.png)
+![Coordinates and connectivity stored in a surface file](./images/3mesh-elements-withcoords.png)
 
 ### Surface Representations and Vertex-Wise Data
 
@@ -216,6 +216,36 @@ Which regions are easier to inspect on the inflated surface? What anatomical inf
 4. Let's repeat the same steps for `wb_view subject-2/tutorial-2.wb.spec` (33.4w) and try to use the sphere as well.
 
 ## 5. Checking Surface Quality
+
+A smooth-looking surface is not necessarily an accurate reconstruction. Quality control requires checking both the mesh geometry and its agreement with the underlying MRI.
+
+Let's open `wb_view subject-3/tutorial-3.wb.spec` (31.4w)
+
+### Compare the surface with the MRI
+
+Display the T2w image with surface outlines and inspect several slices in different orientations.
+Check whether:
+- The white matter surface follows the grey–white matter boundary.
+- The pial surface follows the outer cortical boundary.
+- The surfaces avoid extending into neighbouring tissues.
+- Now try the same but with the segmentation map instead of the T2w image.
+
+*Note: Some geometric problems, such as small self-intersections, can be difficult to detect visually and may require automated checks.*
+
+![Example of using Workbench Viewer](./images/5wbviewexample.png)
+
+### Inspect the three-dimensional geometry
+
+Let's now open `wb_view subject-4/tutorial-4.wb.spec` (29.3w)
+
+Try:
+- Rotate the surface and look for unexpected spikes, bridges, irregular patches, or other local distortions. 
+- Inspect suspicious regions in the MRI to understand whether the problem originates in the image, segmentation, or reconstruction.
+- What do you notice immediately in this example? 
+- Click on the problem and identify it in the MRI slice.
+- Discuss: what could have caused this issue?
+
+![Example of surfaces with problems](./images/6subjectproblem1.png)
 
 ## 6. From Individual Surfaces to Group Analysis
 
