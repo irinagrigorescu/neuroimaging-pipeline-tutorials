@@ -391,6 +391,7 @@ wb_command -metric-resample \
   - Do the surfaces now have the same number of vertices?
   - Do matching vertices lie on corresponding cortical features?
   - What has resampling changed, and what is still missing?
+  - Overlay the sulcal depth maps on top of both surfaces: what do you notice?
 
 Resampling onto a common ico-6 mesh gives both surfaces a common vertex
 count and connectivity. However, if the spherical surfaces used for
