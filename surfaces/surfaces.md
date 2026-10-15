@@ -24,7 +24,7 @@ You will need:
 3. [How Are Surfaces Represented?](#3-how-are-surfaces-represented)
 4. [Exploring Surfaces in Connectome Workbench](#4-exploring-surfaces-in-connectome-workbench)
 5. [Checking Surface Quality](#5-checking-surface-quality)
-6. [From Individual Surfaces to Group Analysis](#6-from-individual-surfaces-to-group-analysis)
+6. [Surface Reconstruction and Preparation for Group Analysis](#6-surface-reconstruction-and-preparation-for-group-analysis)
 7. [Further Reading](#7-further-reading)
 
 
@@ -259,27 +259,169 @@ For each example, answer:
 3. What does the corresponding MRI show?
 4. How could the error influence a measurement such as thickness or sulcal depth?
 
-## 6. From Individual Surfaces to Group Analysis
+## 6. Surface Reconstruction and Preparation for Group Analysis
 
-Once we have checked each subject's surfaces, we need a way to compare corresponding cortical locations across subjects.
+Surface reconstruction creates a mesh that follows an individual subject's
+cortical boundary. Before comparing measurements across subjects, we also
+need to establish which cortical locations correspond.
 
-A vertex index identifies a point within a particular mesh. 
-**The same vertex index does not automatically identify the same anatomical location in different subjects.**
-Even meshes with identical connectivity may differ in how their vertices correspond to cortical anatomy.
+### How Are Cortical Surfaces Generated?
 
-| | before registration | after registration |
+Reconstruction methods generally use an MRI image, a tissue segmentation,
+or both to identify cortical boundaries. Two broad approaches differ in
+how they initialise the mesh.
+
+#### Methods Using a Shared Template
+
+Template-based methods start from a common initial mesh and deform its
+vertices towards each subject's cortical boundary.
+
+Using the same template preserves vertex indices and mesh connectivity
+across subjects. However, matching the boundary alone does not guarantee
+that each vertex reaches the same anatomical feature.
+
+Let's look at an example: run `wb_view subject-7/tutorial-7.wb.spec` 
+which will open two subjects' left hemisphere white matter surfaces,
+both scanned around 30 weeks. 
+Make sure you select both surfaces and then click in and around the central sulcus: what happens?
+
+![Example of two surfaces without vertex correspondence](./images/7subjects.png)
+
+The animations below show the same initial mesh (see below) deforming towards the
+anatomy of two fetal subjects scanned at approximately 30 weeks.
+A selected vertex and the template sulcal depth map allow us
+to follow how locations on the initial mesh move during reconstruction.
+
+![Initial mesh with sulcal depth map overlaid](./images/8initialsurface.png)
+
+**Before registration**, tracked vertices reach different anatomical
+locations across subjects: for example, opposite banks of the central
+sulcus. The propagated map also fails to align with the subjects'
+folding patterns. Although the reconstructed boundaries may be accurate,
+matching vertex indices do not provide reliable anatomical correspondence.
+
+**After registration**, the tracked locations and propagated map should
+ideally be aligned with corresponding cortical features. This illustrates
+the correspondence needed for meaningful vertex-wise comparisons.
+
+| | Before registration | After registration |
 | :--- | :--- | :--- |
-| **subject 1** | ![Subject 1 Before](./images/baseline-subject1-flip.gif) | ![Subject 1 After](./images/registered-subject1-flip.gif) |
-| **subject 2** | ![Subject 2 Before](./images/baseline-subject2-flip.gif) | ![Subject 2 After](./images/registered-subject2-flip.gif) |
+| **Subject 1** | ![Subject 1 before registration](./images/baseline-subject1-flip.gif) | ![Subject 1 after registration](./images/registered-subject1-flip.gif) |
+| **Subject 2** | ![Subject 2 before registration](./images/baseline-subject2-flip.gif) | ![Subject 2 after registration](./images/registered-subject2-flip.gif) |
 
-Surface registration aligns cortical features to establish correspondence. 
-Spherical representations are commonly used for this process.
+**Take-home message:** Shared vertex indices and connectivity do not
+automatically imply shared anatomical locations.
 
-After registration and appropriate resampling, measurements can be compared on a common mesh. 
-This supports group analyses, such as testing associations between cortical measurements and age or differences between groups.
+#### Methods Without a Shared Template
 
-The next tutorial introduces **MSM** for surface registration and **PALM** for statistical analysis.
-Reliable analysis depends on both accurate reconstruction and meaningful correspondence.
+Other methods extract an initial mesh independently from each subject's
+image or segmentation, then refine it to follow the cortical boundary.
+
+These meshes can have different numbers of vertices and different
+connectivity. Vertex indices are assigned during mesh construction:
+vertex 100 in one subject has no inherent relationship to vertex 100
+in another.
+
+Let's now look at the same two subjects as before, but their surfaces have been reconstructed with a different method.
+Open the files by running `wb_view subject-8/tutorial-8.wb.spec` 
+
+- What happened? Why?
+- Goto Surface → Information and write down the number of vertices and the number of faces.
+- Now open the other surface separately `wb_view subject-8/[replace_with_subject_filename].surf.gii` and do the same as above.
+
+**Exercise: does a common mesh resolution solve the problem?**
+
+Resample both subjects' surfaces onto an **ico-6 mesh**, containing
+40,962 vertices and 81,920 triangular faces per hemisphere.
+
+Open a terminal and write the following commands:
+
+```
+## SUBJECT's name / ID below
+SUBJ=""  # replace with the name of the subject here
+## The reference mesh we want to resample to, i.e. the ico-6 sphere
+REF_MESH_ICO6="ico-6.surf.gii"
+
+## Filename of the input surface
+INSURF_IN="${SUBJ}.L.white.native.surf.gii"
+## Filename  its corresponding sphere
+SPHERE_IN="${SUBJ}.L.sphere.native.surf.gii"
+## Filename of the output surface (notice I just replaced native with ico6 in the filename)
+SURF_OUT_ICO6="${SUBJ}.L.white.ico6.surf.gii"
+
+## And now, the surface resampling command:
+wb_command -surface-resample \
+           "${INSURF_IN}" \
+           "${SPHERE_IN}" \
+           "${REF_MESH_ICO6}" \
+           BARYCENTRIC \
+           "${SURF_OUT_ICO6}"
+```
+
+The code above only resamples the surface, but the associated metric map is still in its native resolution.
+Let's fix that by running the following commnads in the same terminal as before:
+
+```
+## SUBJECT's name / ID below
+SUBJ=""  # replace with the name of the subject here
+## The reference mesh we want to resample to, i.e. the ico-6 sphere
+REF_MESH_ICO6="ico-6.surf.gii"
+
+## Filename  the native sphere (as above)
+SPHERE_IN="${SUBJ}.L.sphere.native.surf.gii"
+
+## Filename of the input metric
+METRIC_IN="${SUBJ}.L.sulc.native.shape.gii"
+## Filename of the output metric
+METRIC_OUT_ICO6="${SUBJ}.L.sulc.ico6.shape.gii"
+
+## And now, the metric resampling command:
+wb_command -metric-resample \
+           "${METRIC_IN}" \
+           "${SPHERE_IN}" \
+           "${REF_MESH_ICO6}" \
+           BARYCENTRIC \
+           "${METRIC_OUT_ICO6}"
+```
+
+- Repeat the commands for the second subject.
+
+- Inspect the resampled surfaces:
+  - Do the surfaces now have the same number of vertices?
+  - Do matching vertices lie on corresponding cortical features?
+  - What has resampling changed, and what is still missing?
+
+Resampling onto a common ico-6 mesh gives both surfaces a common vertex
+count and connectivity. However, if the spherical surfaces used for
+resampling have not been anatomically registered, corresponding ico-6
+vertices can still sample different anatomical locations.
+
+**Take-home message:** A common mesh resolution does not establish
+anatomical correspondence. Resampling transfers data according to a
+mapping; it does not estimate anatomical alignment.
+
+### What Processing Is Needed Before Group Analysis?
+
+Both examples illustrate the same distinction: reconstructing an accurate
+cortical boundary and establishing correspondence across subjects are
+separate tasks.
+
+Surface registration is commonly performed using spherical
+representations. It estimates a mapping between cortical locations;
+resampling then uses that mapping to transfer surface geometry,
+measurements, or labels onto a common mesh.
+
+### From Correspondence to Statistical Analysis
+
+Once measurements are represented at corresponding cortical locations,
+we can perform vertex-wise analyses—for example, testing associations
+between cortical thickness and age or differences between groups.
+
+Additional processing, such as surface smoothing or applying a common
+analysis mask, depends on the study and statistical workflow.
+
+The next tutorial introduces **MSM** for surface registration and
+**PALM** for statistical analysis.
 
 ## 7. Further Reading
 
