@@ -267,6 +267,11 @@ A vertex index identifies a point within a particular mesh.
 **The same vertex index does not automatically identify the same anatomical location in different subjects.**
 Even meshes with identical connectivity may differ in how their vertices correspond to cortical anatomy.
 
+| | before registration | after registration |
+| :--- | :--- | :--- |
+| **subject 1** | ![Subject 1 Before](./images/baseline-subject1-flip.gif) | ![Subject 1 After](./images/registered-subject1-flip.gif) |
+| **subject 2** | ![Subject 2 Before](./images/baseline-subject2-flip.gif) | ![Subject 2 After](./images/registered-subject2-flip.gif) |
+
 Surface registration aligns cortical features to establish correspondence. 
 Spherical representations are commonly used for this process.
 
