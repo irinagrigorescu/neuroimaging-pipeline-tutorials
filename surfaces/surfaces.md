@@ -247,9 +247,42 @@ Try:
 
 ![Example of surfaces with problems](./images/6subjectproblem1.png)
 
+### Exercise: can you spot the problem?
+
+Compare the supplied examples:
+1. `wb_view subject-5/tutorial-5.wb.spec` (29.1w)
+2. `wb_view subject-6/tutorial-6.wb.spec` (36.7w)
+
+For each example, answer:
+1. Where is the suspicious region?
+2. Which surface or boundary is affected?
+3. What does the corresponding MRI show?
+4. How could the error influence a measurement such as thickness or sulcal depth?
+
 ## 6. From Individual Surfaces to Group Analysis
 
+Once we have checked each subject's surfaces, we need a way to compare corresponding cortical locations across subjects.
+
+A vertex index identifies a point within a particular mesh. 
+**The same vertex index does not automatically identify the same anatomical location in different subjects.**
+Even meshes with identical connectivity may differ in how their vertices correspond to cortical anatomy.
+
+Surface registration aligns cortical features to establish correspondence. 
+Spherical representations are commonly used for this process.
+
+After registration and appropriate resampling, measurements can be compared on a common mesh. 
+This supports group analyses, such as testing associations between cortical measurements and age or differences between groups.
+
+The next tutorial introduces **MSM** for surface registration and **PALM** for statistical analysis.
+Reliable analysis depends on both accurate reconstruction and meaningful correspondence.
+
 ## 7. Further Reading
+
+For more detailed instructions and reference material:
+
+- [Connectome Workbench](https://www.humanconnectome.org/software/connectome-workbench) — software overview and resources.
+- [Workbench Tutorial and User Guide](https://www.humanconnectome.org/storage/app/media/documentation/tutorials/Connectome_WB_Tutorial_v1.5.pdf) — detailed examples of surface and volume visualisation, based on version 1.5.
+- [Workbench Command Reference](https://www.humanconnectome.org/software/workbench-command) — documentation for command-line processing tools.
 
 --- 
 
