@@ -333,6 +333,7 @@ Open the files by running `wb_view subject-8/tutorial-8.wb.spec`
 
 Resample both subjects' surfaces onto an **ico-6 mesh**, containing
 40,962 vertices and 81,920 triangular faces per hemisphere.
+The **ico-6** surface is provided in the folder at `subject-8/ico-6.surf.gii`.
 
 Open a terminal and write the following commands:
 
