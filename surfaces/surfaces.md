@@ -194,6 +194,8 @@ A specification file contains references to the data files that are to be open:
 </CaretSpecFile>
 ```
 
+![Example of using Workbench Viewer](./images/4wbviewexample.png)
+
 ### Explore the surface
 
 Using File → Open, load the supplied surface files. Select the white matter surface and inspect it from different directions.
