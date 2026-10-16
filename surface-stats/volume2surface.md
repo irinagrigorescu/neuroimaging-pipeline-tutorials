@@ -89,13 +89,11 @@ From the previous lecture, we already know the advantages of surface-based analy
 - **fMRI:** We usually **directly map the preprocessed BOLD signal** at each time point onto the cortical surface. This gives us a time series of functional signals at each cortical vertex.
 - **dMRI:** It's a little different. Rather than directly mapping raw diffusion-weighted images, we first fit diffusion models to the preprocessed dMRI data to derive quantitative measures that reflect tissue microstructural properties. We then map these diffusion metrics onto the cortical surface.
 
-The figure below shows how we derive diffusion metrics using one of the simplest and most commonly used models: **diffusion tensor imaging (DTI)**.
+The figure below shows how we derive diffusion metrics using one of the simplest and most commonly used models: **diffusion tensor imaging (DTI)**. The diffusion tensor model represents water diffusion within each voxel as an ellipsoid. The tensor itself is a **3 × 3 matrix**. 
 
 ![Understanding diffusion tensor imaging](images/volume2surface_DTI.png)
 
-*Figures adapted from [FSL Course Materials](https://pages.fmrib.ox.ac.uk/fslcourse/website/online_materials.html). Additional reference: [Psychoradiology](https://academic.oup.com/psyrad/article/1/4/257/6485110).*
-
-The diffusion tensor model represents water diffusion within each voxel as an ellipsoid. The tensor itself is a **3 × 3 matrix**. 
+*Figures adapted from [FSL Course Materials](https://pages.fmrib.ox.ac.uk/fslcourse/website/online_materials.html).*
 
 **Left side of the figure:** The equation describes how we calculate **3 × 3 matrix** from the diffusion-weighted MRI signal:
 - **S:** Diffusion-weighted MRI signal.
@@ -116,7 +114,7 @@ The figure below shows example voxel-wise FA and MD maps generated using FSL's `
 
 ![Voxel-wise FA and MD maps](images/volume2surface_FAMD.png)
 
-Now that we have these voxel-wise diffusion metrics, we can start mapping them onto the cortical surface.
+### Now that we have these voxel-wise diffusion metrics, we can start mapping them onto the cortical surface.
 
 
 ## Practice: Mapping dMRI Metrics onto the Cortical Surface
@@ -284,9 +282,9 @@ Try using the same colour scale for all three maps so you can compare them direc
 
 ### 6) Exercise: Map fMRI Data onto the Cortical Surface
 
-We can use **the same approach** to map fMRI data onto the cortical surface. The main difference is that fMRI data are 4D, containing multiple time points, whereas our diffusion metric (MD) is a single 3D volume. For this exercise, we'll use the preprocessed resting-state fMRI data:
+We can use **the same approach** to map fMRI data onto the cortical surface. The main difference is that **fMRI data are 4D**, containing multiple time points, whereas our **diffusion metric (MD) is a single 3D volume**. For this exercise, we'll use the preprocessed resting-state fMRI data:
 `./data/volume2surface/fMRI/task-rest_desc-preproc_bold.nii.gz`
-This is a 4D image containing 4 time points. In real fMRI datasets, there are usually hundreds of time points.
+This is a 4D image containing **4 time points**. In real fMRI datasets, there are usually hundreds of time points.
 
 **Your task:**
 
