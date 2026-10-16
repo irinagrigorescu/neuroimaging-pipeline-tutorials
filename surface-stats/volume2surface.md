@@ -9,7 +9,7 @@ Let's briefly look at how they differ.
 
 | | Structural MRI (sMRI) | Diffusion MRI (dMRI) | Functional MRI (fMRI) |
 |---|---|---|---|
-| **Data** | 3D: a single brain volume | 4D: a series of volumes acquired with different diffusion weightings and directions | 4D: a series of volumes acquired over time |
+| **Data** | **3D**: a single brain volume | **4D**: a series of volumes acquired with different diffusion weightings and directions | **4D**: a series of volumes acquired over time |
 | **Imaging principle** | Measures differences in tissue relaxation properties to distinguish brain tissues | Measures the movement of water molecules in brain tissue | Measures changes in blood oxygenation (BOLD signal) associated with neural activity |
 | **Applications** | Regional brain volume, cortical thickness, surface area, sulcal depth | White matter connectivity, cortical microstructure | functional connectivity |
 | **Preprocessing** | Bias field correction, brain extraction | Bias field correction, brain extraction, **denoising, motion and distortion correction** | Bias field correction, brain extraction, **denoising, motion and distortion correction** |
