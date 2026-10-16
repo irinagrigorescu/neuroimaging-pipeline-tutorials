@@ -83,10 +83,10 @@ This tutorial won't focus on dMRI/fMRI preprocessing, but here are some useful r
 
 ## 2. Volume-to-Surface Mapping
 
-### What Do We Map from dMRI and fMRI to the Cortical Surface?
+## What Do We Map from dMRI and fMRI to the Cortical Surface?
 
 From the previous lecture, we already know the advantages of surface-based analysis for studying the cerebral cortex. We can measure cortical macrostructural properties, such as cortical thickness and sulcal depth, directly on the surface. Now, we also want to map **microstructural measures from dMRI** and **functional signals from fMRI** onto the cortical surface.
-- **fMRI:** We usually map the preprocessed BOLD signal at each time point onto the cortical surface. This gives us a time series of functional signals at each cortical vertex.
+- **fMRI:** We usually **directly map the preprocessed BOLD signal** at each time point onto the cortical surface. This gives us a time series of functional signals at each cortical vertex.
 - **dMRI:** It's a little different. Rather than directly mapping raw diffusion-weighted images, we first fit diffusion models to the preprocessed dMRI data to derive quantitative measures that reflect tissue microstructural properties. We then map these diffusion metrics onto the cortical surface.
 
 The figure below shows how we derive diffusion metrics using one of the simplest and most commonly used models: **diffusion tensor imaging (DTI)**.
@@ -95,10 +95,12 @@ The figure below shows how we derive diffusion metrics using one of the simplest
 
 *Figures adapted from [FSL Course Materials](https://pages.fmrib.ox.ac.uk/fslcourse/website/online_materials.html). Additional reference: [Psychoradiology](https://academic.oup.com/psyrad/article/1/4/257/6485110).*
 
-The diffusion tensor model represents water diffusion within each voxel as an ellipsoid. The tensor itself is a **3 × 3 matrix**. **Left side of the figure:** The equation describes how the diffusion-weighted MRI signal relates to water diffusion:
+The diffusion tensor model represents water diffusion within each voxel as an ellipsoid. The tensor itself is a **3 × 3 matrix**. 
+
+**Left side of the figure:** The equation describes how we calculate **3 × 3 matrix** from the diffusion-weighted MRI signal:
 - **S:** Diffusion-weighted MRI signal.
 - **S₀:** Baseline signal without diffusion weighting (b = 0).
-- **b:** Diffusion weighting, determined by the strength and timing of the diffusion gradients.
+- **b:** Diffusion weighting, determined by gradient strength and diffusion time.
 - **g (or x):** Direction along which diffusion is measured.
 By fitting this equation to measurements acquired with different diffusion directions, we can estimate a **3 × 3 diffusion tensor** for each voxel.
 
@@ -117,7 +119,7 @@ The figure below shows example voxel-wise FA and MD maps generated using FSL's `
 Now that we have these voxel-wise diffusion metrics, we can start mapping them onto the cortical surface.
 
 
-### Practice: Mapping dMRI Metrics onto the Cortical Surface
+## Practice: Mapping dMRI Metrics onto the Cortical Surface
 
 In this section, we'll use Connectome Workbench (`wb_command`) to map diffusion MRI metrics onto the cortical surface. We'll use **mean diffusivity (MD)** derived from DTI as an example. The main steps are:
 
@@ -212,25 +214,6 @@ wb_command -volume-to-surface-mapping \
 
 In practice, we often use `-volume-roi` to restrict sampling to selected voxels, such as cortical grey matter or voxels that have passed quality control.
 
-For example:
-
-```bash
-wb_command -volume-to-surface-mapping \
-    ./data/volume2surface/dMRI/DTI_MD.nii.gz \
-    ./data/volume2surface/dMRI/outputs/left_midthickness_diffspace.surf.gii \
-    ./data/volume2surface/dMRI/outputs/left_DTIMD_raw.shape.gii \
-    -ribbon-constrained \
-    ./data/volume2surface/dMRI/outputs/left_wm_diffspace.surf.gii \
-    ./data/volume2surface/dMRI/outputs/left_pial_diffspace.surf.gii \
-    -volume-roi ./data/volume2surface/dMRI/cortical_gm_mask.nii.gz
-```
-
-Here, `cortical_gm_mask.nii.gz` is an example filename. You would need to provide an appropriate mask in diffusion MRI space.
-
-**Why use a volume ROI?**
-
-It helps avoid sampling voxels outside the region of interest or voxels with unreliable measurements.
-
 ### 3) Fill Missing Values Using Surface Dilation
 
 After volume-to-surface mapping, open the output metric in `wb_view`. You may notice some vertices with missing or zero values. This can happen when the cortical ribbon does not overlap valid voxels at every vertex, particularly when working with relatively low-resolution diffusion MRI data. We can use **surface dilation** to fill these gaps using values from nearby vertices.
@@ -257,12 +240,6 @@ wb_command -metric-dilate \
 | `left_DTIMD_dilated.shape.gii` | Output surface metric after dilation. |
 | `-nearest` | Fills missing values using the nearest valid vertex rather than a weighted average. |
 | `-data-roi` | Specifies which vertices contain valid input data. |
-
-**Important:** The `-data-roi` mask should identify vertices with valid MD measurements, rather than simply including all cortical vertices.
-
-If `left_roi.native.shape.gii` is a general cortical mask containing vertices with missing values, it may not be suitable as the `-data-roi` mask. In that case, you should create a separate valid-data mask.
-
-Also, dilation does not recover the original MRI measurements. It fills missing surface values using neighbouring vertices, so the dilation distance should be chosen carefully.
 
 ### 4) Surface Smoothing
 
@@ -300,7 +277,7 @@ Now open the following three surface metrics in `wb_view`:
 Compare them and think about:
 
 - Where are the missing values in the raw metric?
-- How does dilation fill these gaps?
+- How does dilation fill these missing values?
 - What happens to the spatial maps after smoothing?
 
 Try using the same colour scale for all three maps so you can compare them directly. This should give you a better understanding of how dilation and smoothing work.
