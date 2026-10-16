@@ -22,11 +22,9 @@ For **dMRI**, the 4th dimension represents different diffusion-weighted measurem
 
 *Figure adapted from [FSL Course Materials](https://pages.fmrib.ox.ac.uk/fslcourse/website/online_materials.html).*
 
-**1) How does water diffuse in the brain?**
-Water molecules move randomly in brain tissue, but their movement is influenced by tissue structures. For example, in white matter, water tends to diffuse more easily along nerve fibres than across them. We call this **anisotropic diffusion**. By measuring how much water diffuses and whether it has a preferred direction, we can infer properties of the underlying tissue microstructure.
+**1) How does water diffuse in the brain:** Water molecules move randomly in brain tissue, but their movement is influenced by tissue structures. For example, in white matter, water tends to diffuse more easily along nerve fibres than across them. We call this **anisotropic diffusion**. By measuring how much water diffuses and whether it has a preferred direction, we can infer properties of the underlying tissue microstructure.
 
-**2) How does MRI measure water diffusion?**
-Diffusion MRI uses diffusion-sensitive magnetic field gradients to measure water movement. Water diffusion causes changes in the MRI signal, with greater diffusion generally producing greater signal attenuation for a given diffusion weighting. We acquire a series of brain volumes using different diffusion parameters:
+**2) How does MRI measure water diffusion:** Diffusion MRI uses diffusion-sensitive magnetic field gradients to measure water movement. Water diffusion causes changes in the MRI signal, with greater diffusion generally producing greater signal attenuation for a given diffusion weighting. We acquire a series of brain volumes using different diffusion parameters:
 - **b-value:** Describes how strongly the MRI signal is weighted by diffusion. It depends on the gradient strength and diffusion time.
 - **b-vector:** Defines the direction along which diffusion is measured.
 
