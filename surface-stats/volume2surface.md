@@ -13,7 +13,6 @@ Let's briefly look at how they differ.
 | **Imaging principle** | Measures differences in tissue relaxation properties to distinguish brain tissues | Measures the movement of water molecules in brain tissue | Measures changes in blood oxygenation (BOLD signal) associated with neural activity |
 | **Applications** | Regional brain volume, cortical thickness, surface area, sulcal depth | White matter connectivity, cortical microstructure | functional connectivity |
 | **Preprocessing** | Bias field correction, brain extraction | Bias field correction, brain extraction, **denoising, motion and distortion correction** | Bias field correction, brain extraction, **denoising, motion and distortion correction** |
-| **Preprocessing tools** | Neonates: dHCP structural pipeline; Children and adults: FreeSurfer (`recon-all`), ciftify | FSL (TOPUP/EDDY); MRtrix SHARD; QSIPrep | dHCP fMRI pipeline; HCP fMRI pipelines; fMRIPrep |
 
 ### Understanding 4D dMRI and fMRI Data
 
@@ -25,12 +24,13 @@ For **dMRI**, the 4th dimension represents different diffusion-weighted measurem
 
 **1) How does water diffuse in the brain?**
 Water molecules move randomly in brain tissue, but their movement is influenced by tissue structures. For example, in white matter, water tends to diffuse more easily along nerve fibres than across them. We call this **anisotropic diffusion**. By measuring how much water diffuses and whether it has a preferred direction, we can infer properties of the underlying tissue microstructure.
+
 **2) How does MRI measure water diffusion?**
 Diffusion MRI uses diffusion-sensitive magnetic field gradients to measure water movement. Water diffusion causes changes in the MRI signal, with greater diffusion generally producing greater signal attenuation for a given diffusion weighting. We acquire a series of brain volumes using different diffusion parameters:
 - **b-value:** Describes how strongly the MRI signal is weighted by diffusion. It depends on the gradient strength and diffusion time.
 - **b-vector:** Defines the direction along which diffusion is measured.
 
-**Key takeaway:** When working with dMRI, always check that you have the **4D diffusion image** and its corresponding **b-value (`.bval`) and b-vector (`.bvec`) files**. These files contain essential acquisition information, and without valid, matching information, you cannot reliably preprocess or analyse the diffusion data.
+**Key takeaway:** When working with dMRI, always check that you have the **4D diffusion image** and its corresponding **b-value (`.bval`) and b-vector (`.bvec`) files**. These files contain essential acquisition information, and without valid, matching information, you cannot preprocess or analyse the diffusion data.
 
 ### Preprocessing
 
@@ -42,7 +42,7 @@ One important thing to know is that **diffusion and functional MRI are usually a
 
 This tutorial won't focus on dMRI/fMRI preprocessing, but here are some useful references and links to commonly used preprocessing pipelines. One thing to keep in mind is that **neonatal MRI data usually require different preprocessing pipelines from childhood and adult data**, due to differences in brain development and imaging characteristics. The pipelines listed below are widely used in neuroimaging research. They follow broadly similar principles but may differ in specific processing steps. The choice of pipeline depends on your data and research needs.
 
-### 1. sMRI
+### 1) sMRI
 
 **Neonates:**
 - Makropoulos, Antonios et al. “The developing human connectome project: A minimal processing pipeline for neonatal cortical surface reconstruction.” *NeuroImage* vol. 173 (2018): 88–112. doi:10.1016/j.neuroimage.2018.01.054      **the original dHCP structural pipeline, including drawEM segmentation, surface reconstruction and feature generation**  
@@ -55,7 +55,7 @@ This tutorial won't focus on dMRI/fMRI preprocessing, but here are some useful r
 - **FreeSurfer (`recon-all`):** surface reconstruction and feature generation [https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all](https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all)
 - **ciftify:** to convert freesurfer outputs to HCP-style outputs for visualization and surface registration [https://edickie.github.io/ciftify/#/](https://edickie.github.io/ciftify/#/)
 
-### 2. dMRI
+### 2) dMRI
 
 **Neonates:**
 - Bastiani, Matteo et al. “Automated processing pipeline for neonatal diffusion MRI in the developing Human Connectome Project.” *NeuroImage* vol. 185 (2019): 750–763. doi:10.1016/j.neuroimage.2018.05.064  
@@ -69,7 +69,7 @@ This tutorial won't focus on dMRI/fMRI preprocessing, but here are some useful r
 - **FSL TOPUP/EDDY:** [https://fsl.fmrib.ox.ac.uk/fsl/docs/diffusion/index.html](https://fsl.fmrib.ox.ac.uk/fsl/docs/diffusion/index.html)
 - **MRtrix SHARD reconstruction:** [https://github.com/dchristiaens/shard-recon](https://github.com/dchristiaens/shard-recon)
 
-### 3. fMRI
+### 3) fMRI
 
 **Neonates:**
 - Fitzgibbon, Sean P et al. “The developing Human Connectome Project (dHCP) automated resting-state functional processing framework for newborn infants.” *NeuroImage* vol. 223 (2020): 117303. doi:10.1016/j.neuroimage.2020.117303  
