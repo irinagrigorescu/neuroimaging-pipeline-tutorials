@@ -71,7 +71,9 @@ Nearby vertices often show similar effects. Instead of looking at each vertex co
 
 ### 2.4 Why do we need multiple-comparison correction?
 
-Imagine testing 10,000 vertices at *p* < 0.05. Even if there were no real effects, we could expect about **500 false-positive tests on average** if each test had a 5% false-positive rate. One approach is **family-wise error rate (FWE) correction**. Simply speaking, if we test 10,000 cortical vertices, FWE correction controls the probability of getting **at least one false positive across all 10,000 tests** to 5%.
+Imagine testing 10,000 vertices at *p* < 0.05. Even if there were no real effects, we could expect about **500 false-positive tests on average** if each test had a 5% false-positive rate. To address this problem, we need multiple-comparison correction, such as **family-wise error rate (FWE) correction**. Simply speaking, if we test 10,000 cortical vertices, FWE correction controls the probability of getting **at least one false positive across all 10,000 tests** to 5%.
+
+This is similar to the **Bonferroni correction**, which you may already be familiar with. For example, if we perform 8 statistical tests, the significance threshold is no longer *p* < 0.05, but **p < 0.05 / 8 = 0.00625**.
 
 In this tutorial, we need to correct across:
 
