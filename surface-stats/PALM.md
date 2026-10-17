@@ -159,13 +159,13 @@ To merge individual surface metrics into one input file, see [Workbench `-metric
 
 ### 3.4 Understanding PALM Outputs
 
-After running PALM, look in: `./data/PALM/group_comp/`. The exact filenames depend on the requested options, but the following parts of the names are particularly useful.
+1) After running PALM, look in: `./data/PALM/group_comp/`. The exact filenames depend on the requested options, but the following parts of the names are particularly useful.
 
 - **`dpv`:** Relate to the original vertex-wise statistics and their associated inference, **without TFCE enhancement**.
 - **`tfce`:** Relate to TFCE-enhanced statistics and permutation inference. These are **the main outputs for our TFCE analysis**.
 
 
-For PALM *p*-value outputs, common labels include:
+2) For PALM *p*-value outputs, common labels include:
 
 | Label | Interpretation |
 |---|---|
@@ -178,7 +178,7 @@ For PALM *p*-value outputs, common labels include:
 Because we specified both `-corrcon` and `-corrmod`, the **TFCE `mcfwep`** outputs are the most relevant when interpreting results corrected across both modalities and both contrasts.
 
 
-How can we tell which modality and contrast each output file represents? Let's look at the order of the inputs used in this tutorial:
+3) How can we tell which modality and contrast each output file represents? Let's look at the order of the inputs used in this tutorial:
 
 - **`m1`:** Surface area.
 - **`m2`:** MD.
@@ -198,16 +198,17 @@ Assuming the contrasts in `design.con` are ordered as in our GLM example:
 **Exercise:** Open `design.con` and check whether these contrast directions are correct. If the contrasts are ordered differently, the interpretations above must change.
 
 
-How do we read `-log10(p)` maps? We used `-logp`, so the saved significance values are: `-log10(p)`. For a conventional threshold of **p < 0.05**:
+4) We used `-logp` to define statistical significance, so the saved significance values are: `-log10(p)`. For a conventional threshold of **p < 0.05**:
 
 `-log10(0.05) ≈ 1.301`
 
 Therefore, on a `-logp` map, values **greater than 1.301** correspond to *p* < 0.05. For the `mcfwep` map, this means *p* < 0.05 **after the requested FWE corrections**. Larger `-log10(p)` values mean smaller *p*-values.
 
 
-To visualise the results in `wb_view`: Open the relevant PALM output maps in `wb_view` and inspect the TFCE-corrected results.
+**To visualise the results in `wb_view`**: Open the relevant PALM output maps in `wb_view` and inspect the TFCE-corrected results.
 
 If `wb_view` cannot recognise the output GIFTI file, **add `.shape` before `.gii`** (i.e., rename it to `.shape.gii`) so that `wb_view` can recognise it as a surface metric file. Use a threshold of **1.3** for the `-log10(p)` maps and check which vertices survive correction.
+
 
 **Questions to think about:**
 
