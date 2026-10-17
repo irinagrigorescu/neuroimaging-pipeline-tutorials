@@ -46,22 +46,20 @@ The zeros indicate that **scan age and sex are included as covariates in the mod
 
 **Remember:** The design matrix tells the model **which variables we have**; the contrast tells it **which effect we want to test**. Both are essential for running PALM and interpreting the results.
 
-### 2.2 What is a permutation test?
 
-The basic question is: **Could the group difference we observed have happened by chance?**
+### 2.2 What is a Permutation Test?
 
-Suppose we calculate a *t*-statistic comparing preterm and full-term neonates at one cortical vertex. A permutation test asks what kinds of *t*-statistics we would see **if there were actually no group difference**.
+In statistics, we often distinguish between **parametric and non-parametric tests**. Familiar tests, such as the *t*-test, make certain assumptions about the data, while non-parametric methods, such as permutation testing, rely on fewer distributional assumptions.
 
-In a simple two-group example:
+The main question behind permutation testing is simple: **Could the group difference we observed have happened just by chance?** Let's take a simple two-group comparison as an example:
 
-1. Calculate the observed *t*-statistic using the real group labels.
-2. Shuffle the group labels (under the null hypothesis) and calculate the statistic again.
-3. Repeat this many times to build a **null distribution**.
-4. Compare the observed statistic with this distribution. If very few permutations produce a statistic as extreme as the observed one, the result is unlikely under the null hypothesis.
+1. Calculate the observed *t*-statistic using the original group labels.
+2. Randomly shuffle the group labels and calculate the *t*-statistic again.
+3. Repeat this many times to build a **null distribution** (what we would expect if there were no real group difference).
+4. Compare the observed statistic with this null distribution.
 
-In a GLM with covariates, PALM uses appropriate permutation strategies rather than simply shuffling labels in every situation. **Permutations must respect the study design and exchangeability assumptions**, particularly for repeated measures or related participants.
+For example, suppose we run **1,000 permutations**, and none produces a statistic as extreme as the observed one. Using the standard permutation *p*-value calculation, we get **p = (0 + 1) / (1000 + 1) ≈ 0.001**. This means that a difference as extreme as the one we observed would be very unlikely under the null hypothesis.
 
-**Parametric vs non-parametric testing:** Familiar tests such as the *t*-test and ANOVA usually rely on parametric assumptions about the model errors. Permutation tests estimate significance from rearrangements of the data under the null hypothesis, reducing reliance on a theoretical reference distribution. However, permutation tests still have assumptions; they are not automatically valid for every dataset.
 
 ### 2.3 What is Threshold-Free Cluster Enhancement (TFCE)?
 
@@ -70,15 +68,12 @@ Nearby vertices often show similar effects. Instead of looking at each vertex co
 - **Cluster:** A connected set of neighbouring vertices or voxels.
 - **Threshold-free:** Unlike traditional cluster-based methods, TFCE does not require us to choose one arbitrary cluster-forming threshold.
 
-TFCE produces an enhanced statistic at each vertex. PALM can then use permutations to assess significance and correct for multiple comparisons. **TFCE itself is not a multiple-comparison correction**; correction comes from the permutation-based inference applied to the TFCE statistic.
 
-### 2.3 Why do we need multiple-comparison correction?
+### 2.4 Why do we need multiple-comparison correction?
 
-Imagine testing 10,000 vertices at *p* < 0.05. Even if there were no real effects, we could expect about **500 false-positive tests on average** if each test had a 5% false-positive rate.
+Imagine testing 10,000 vertices at *p* < 0.05. Even if there were no real effects, we could expect about **500 false-positive tests on average** if each test had a 5% false-positive rate. One approach is **family-wise error rate (FWE) correction**. Simply speaking, if we test 10,000 cortical vertices, FWE correction controls the probability of getting **at least one false positive across all 10,000 tests** to 5%.
 
-One approach is **family-wise error rate (FWER) correction**, which controls the probability of making **at least one false-positive claim** across a specified family of tests, typically at 5%.
-
-In this tutorial, we may need to correct across:
+In this tutorial, we need to correct across:
 
 - **Vertices:** Thousands of locations on the cortical surface.
 - **Contrasts:** For example, full-term > preterm and preterm > full-term.
@@ -89,11 +84,9 @@ PALM can handle these levels of correction together.
 
 ## 3. Practical: Compare Surface Area and MD Between Preterm and Full-Term Neonates
 
-All the files for this exercise are in:
+All the files for this exercise are in: `./data/PALM/`
 
-`./data/PALM/`
-
-### 4.1 Check the design matrix and contrasts
+### 3.1 Check the design matrix and contrasts
 
 Before running PALM, open these files:
 
@@ -106,24 +99,19 @@ Look for:
 |---|---|
 | `/NumWaves` in `design.mat` | Number of columns (regressors) in the design matrix. |
 | `/NumPoints` in `design.mat` | Number of observations (rows). For one scan per subject, this is the number of subjects. |
-| `/NumWaves` in `design.con` | Number of contrast weights, which must match the design matrix columns. |
+| `/NumWaves` in `design.con` | Number of regressors, which must match the design matrix columns. |
 | `/NumContrasts` in `design.con` | Number of contrasts to test. |
 | `/Matrix` | Numerical values defining the design or contrasts. |
 
 In this exercise, we compare the two groups while accounting for **scan age and sex**. You can create these files manually or use the FSL GLM setup tool. For other study designs, see [FSL GLM](https://web.mit.edu/fsl_v5.0.10/fsl/doc/wiki/GLM.html).
 
-**Check carefully:** The subject order in the merged imaging data must match the row order in `design.mat`. Also check how age and sex are coded and whether the group columns and contrasts match the example above.
+**Check carefully:** The subject order in the merged imaging data (use wb_command -metric-merge to do it) must match the row order in `design.mat`. Also check how age and sex are coded and whether the group columns and contrasts match the example above.
 
-### 4.2 Run PALM
+### 3.2 Run PALM
 
-We'll test two cortical modalities together:
-
-1. **Surface area** (`m1`)
-2. **Mean diffusivity (MD)** (`m2`)
+We'll test two cortical modalities together: **Surface area** (`m1`) and **Mean diffusivity (MD)** (`m2`)
 
 ```bash
-mkdir -p ./data/PALM/group_comp
-
 palm -i ./data/PALM/left_wm_va_corr_smoothed2.10k.shape.gii \
      -m ./data/PALM/left.dHCP.10k.mask_fromHCP.shape.gii \
      -i ./data/PALM/left_DTIMD_smoothed2.10k.shape.gii \
@@ -143,7 +131,7 @@ palm -i ./data/PALM/left_wm_va_corr_smoothed2.10k.shape.gii \
 
 **Important:** `-n 20` is used **only to make the tutorial run quickly**. It is far too few permutations for meaningful inference at *p* < 0.05. For a real analysis, use many more permutations (often **5,000–10,000 or more**, depending on the design and required precision). With only 20 random permutations, the smallest attainable permutation *p*-value is typically about **1/21 ≈ 0.048**, before correction, so corrected results will be very coarse and unstable.
 
-### 4.3 What do the PALM options mean?
+### 3.3 What do the PALM options mean?
 
 The official [PALM User Guide](https://fsl.fmrib.ox.ac.uk/fsl/docs/statistics/palm/user_guide.html) is detailed. Here are the main options used in this tutorial:
 
@@ -167,40 +155,28 @@ To merge individual surface metrics into one input file, see [Workbench `-metric
 
 **Note:** The two `-i` options represent two modalities, not two subjects. Both files must contain the same number of subjects in the same order.
 
-## 5. Understanding PALM Outputs
+### 3.4 Understanding PALM Outputs
 
-After running PALM, look in:
+After running PALM, look in: `./data/PALM/group_comp/`. The exact filenames depend on the requested options, but the following parts of the names are particularly useful.
 
-`./data/PALM/group_comp/`
+- **`dpv`:** Relate to the original vertex-wise statistics and their associated inference, **without TFCE enhancement**.
+- **`tfce`:** Relate to TFCE-enhanced statistics and permutation inference. These are **the main outputs for our TFCE analysis**.
 
-The exact filenames depend on the PALM version and requested options, but the following parts of the names are particularly useful.
-
-### 5.1 Raw statistics versus TFCE statistics
-
-- **`dpv` / unenhanced statistic outputs:** Relate to the original vertex-wise statistics and their associated inference, without TFCE enhancement. PALM uses `dpv` in some output names for the distribution of *p*-values or unenhanced inference; inspect the full filename rather than treating every `dpv` file as a *t*-statistic.
-- **`tfce` outputs:** Relate to TFCE-enhanced statistics and permutation inference. These are the main outputs for our TFCE analysis.
-- **`tstat` outputs:** Show the original *t*-statistics, including the direction and relative strength of the estimated group effect.
-- **`tfce_tstat` outputs (if generated):** Show TFCE-enhanced statistics, which are not the same as ordinary *t*-statistics.
-
-### 5.2 What do the correction labels mean?
 
 For PALM *p*-value outputs, common labels include:
 
 | Label | Interpretation |
 |---|---|
 | `uncp` | Uncorrected *p*-values. |
-| `fwep` | FWER-corrected across the spatial locations in the analysis. |
-| `cfwep` | FWER-corrected across spatial locations and contrasts. |
-| `mfwep` | FWER-corrected across spatial locations and modalities. |
-| `mcfwep` | FWER-corrected across spatial locations, modalities, and contrasts. |
+| `fwep` | FWER-corrected across vertices in the analysis. |
+| `cfwep` | FWER-corrected across vertices and contrasts. |
+| `mfwep` | FWER-corrected across vertices and modalities. |
+| `mcfwep` | FWER-corrected across vertices, modalities, and contrasts. |
 
 Because we specified both `-corrcon` and `-corrmod`, the **TFCE `mcfwep`** outputs are the most relevant when interpreting results corrected across both modalities and both contrasts.
 
-**Important:** Check the actual output filenames and PALM documentation for your installed version; the labels indicate which family of tests has been corrected.
 
-### 5.3 Which modality and contrast does each file represent?
-
-In this example, the inputs are ordered as follows:
+How can we tell which modality and contrast each output file represents? Let's look at the order of the inputs used in this tutorial:
 
 - **`m1`:** Surface area.
 - **`m2`:** MD.
@@ -219,45 +195,40 @@ Assuming the contrasts in `design.con` are ordered as in our GLM example:
 
 **Exercise:** Open `design.con` and check whether these contrast directions are correct. If the contrasts are ordered differently, the interpretations above must change.
 
-### 5.4 How do we read `-log10(p)` maps?
 
-We used `-logp`, so the saved significance values are:
-
-`-log10(p)`
-
-For a conventional threshold of **p < 0.05**:
+How do we read `-log10(p)` maps? We used `-logp`, so the saved significance values are: `-log10(p)`. For a conventional threshold of **p < 0.05**:
 
 `-log10(0.05) ≈ 1.301`
 
-Therefore, on a `-logp` map, values **greater than 1.301** correspond to *p* < 0.05. For the `mcfwep` map, this means *p* < 0.05 **after the requested FWER corrections**.
+Therefore, on a `-logp` map, values **greater than 1.301** correspond to *p* < 0.05. For the `mcfwep` map, this means *p* < 0.05 **after the requested FWE corrections**. Larger `-log10(p)` values mean smaller *p*-values.
 
-Larger `-log10(p)` values mean smaller *p*-values. They do **not** indicate a larger biological effect.
 
-### 5.5 Visualise the results in `wb_view`
+To visualise the results in `wb_view`: Open the relevant PALM output maps in `wb_view` and inspect the TFCE-corrected results.
 
-Open the relevant PALM output maps in `wb_view` and inspect the TFCE-corrected results.
-
-If Workbench does not recognise an output GIFTI metric with a `.gii` extension, check whether it needs the appropriate `.shape.gii` naming convention. Renaming can help software identify the file type, but it does **not** convert the file's internal format.
-
-Use a threshold of **1.301** for the `-log10(p)` maps and check which vertices survive correction.
+If `wb_view` cannot recognise the output GIFTI file, **add `.shape` before `.gii`** (i.e., rename it to `.shape.gii`) so that `wb_view` can recognise it as a surface metric file. Use a threshold of **1.3** for the `-log10(p)` maps and check which vertices survive correction.
 
 **Questions to think about:**
 
 1. Do the significant regions agree with our hypotheses that **preterm neonates have smaller cortical surface area and higher MD**?
 2. Which maps and contrasts would support each hypothesis? *(Hint: surface area `m1_c1`; MD `m2_c2`.)*
-3. If neither effect survives correction, does that prove there is no group difference? Why not?
-4. What might affect statistical power? Think about sample size, measurement noise, effect size, covariates, spatial variability, and correction across many tests.
-5. Can you examine the original `tstat` maps to see the **direction and spatial pattern** of the effects, even where they do not survive correction?
+3. If neither effect survives correction, does that prove there is no real group difference? Why not? What might affect statistical power? 
+4. Can you check the original `tstat` maps to see the **direction and spatial pattern** of the effects, even where they do not survive correction?
 
-**Be careful:** A visible pattern in a *t*-statistic map is not necessarily statistically significant. The original `tstat` map is useful for exploring effect direction; the TFCE-corrected *p*-value maps tell us which results meet the chosen significance threshold. Also, `-n 20` is only a software demonstration: do not draw scientific conclusions from its corrected *p*-values.
+**Be careful:** A visible pattern in a *t*-statistic map does **not mean the group difference is statistically significant**. It only shows the direction and relative strength of the group difference.
 
-## 6. Key Takeaways
+- **`dpv_tstat`**: Shows the original vertex-wise *t*-statistics, before TFCE enhancement.
+- **`tfce_tstat`**: Shows the TFCE-enhanced statistics, which take into account the spatial extent and strength of neighbouring effects.
 
-- **GLM:** Defines the predictors and comparisons we want to test.
+To determine whether a group difference is **statistically significant**, always check the **FWE-corrected *p*-value maps** (e.g., `tfce_mcfwep`), rather than relying on the *t*-statistic maps alone.
+
+
+## Key Takeaways
+
+- **GLM:** Defines what we want to test.
 - **Permutation testing:** Estimates how unusual the observed statistic is under the null hypothesis.
 - **TFCE:** Enhances spatially extended statistical signals without requiring an arbitrary cluster-forming threshold.
-- **FWER correction:** Helps control false positives across vertices, contrasts, and modalities.
-- **PALM outputs:** Always check the modality, contrast, statistic type, and correction level before interpreting a map.
+- **FWE correction:** Helps control false positives across vertices, contrasts, and modalities.
+- **PALM outputs:** Make sure the input data, design matrix, and contrasts are correctly matched, and interpret the results appropriately.
 
 For more details, see the [official PALM User Guide](https://fsl.fmrib.ox.ac.uk/fsl/docs/statistics/palm/user_guide.html).
 
