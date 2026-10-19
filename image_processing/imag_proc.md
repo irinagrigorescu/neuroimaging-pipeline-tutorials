@@ -318,6 +318,118 @@ which will output a column of numbers, representing the timecourse of the averag
 
 The main point of this exercise was to see how to transform your own masks (or images, as the only difference is skipping the thresholding and binarising steps) between spaces. For functional studies you can often do similar things with the tool Featquery but it is not as flexible and generally useful as being able to process things yourself.
 
+### Image Registration with ANTs
+
+This tutorial demonstrates how to register a structural MRI image to the **MNI152 1 mm standard-space brain** using ANTs.
+
+We will use:
+
+- **Fixed image:** `~/fsl/data/standard/MNI152_T1_1mm_brain.nii.gz`
+- **Moving image:** `~/fsl_course_data/registration/STRUCT_brain.nii.gz`
+
+The fixed image defines the target space. Therefore, the goal is to transform `STRUCT_brain.nii.gz` into MNI152 space.
+
+#### 1. Run the Registration
+
+ANTs provides `antsRegistrationSyNQuick.sh`, a convenient wrapper around `antsRegistration`.
+
+Run:
+
+```bash
+mkdir ~/fsl_course_data/registration/ants
+
+cd ~/fsl_course_data/registration/ants
+
+antsRegistrationSyNQuick.sh \
+    -d 3 \
+    -f ~/fsl/data/standard/MNI152_T1_1mm_brain.nii.gz \
+    -m ~/fsl_course_data/registration/STRUCT_brain.nii.gz \
+    -o STRUCT_to_MNI_ \
+    -t s
+```
+
+The main options are:
+
+| Option | Meaning |
+|---|---|
+| `-d 3` | Perform 3D registration |
+| `-f` | Fixed image (MNI152 template) |
+| `-m` | Moving image (subject structural image) |
+| `-o` | Prefix for output files |
+| `-t s` | Rigid + affine + nonlinear SyN registration |
+
+The registration proceeds through increasingly flexible transformations: **rigid → affine → nonlinear SyN**.
+
+#### 2. Registration Outputs
+
+After registration, several files will be created in the current directory. The most important are:
+
+| File | Purpose |
+|---|---|
+| `STRUCT_to_MNI_0GenericAffine.mat` | Linear transformation |
+| `STRUCT_to_MNI_1Warp.nii.gz` | Nonlinear deformation field |
+| `STRUCT_to_MNI_1InverseWarp.nii.gz` | Inverse nonlinear deformation |
+| `STRUCT_to_MNI_Warped.nii.gz` | Structural image transformed into MNI space |
+
+The easiest result to inspect initially is:
+
+```text
+STRUCT_to_MNI_Warped.nii.gz
+```
+
+Compare this image with:
+
+```text
+~/fsl/data/standard/MNI152_T1_1mm_brain.nii.gz
+```
+
+The major anatomical structures and tissue boundaries should align closely.
+
+#### 3. Apply the Transformation to Another Image
+
+The transformations calculated during registration can be reused without repeating the registration.
+
+For example:
+
+```bash
+antsApplyTransforms \
+    -d 3 \
+    -i ~/fsl_course_data/registration/STRUCT_brain.nii.gz \
+    -r ~fsl/data/standard/MNI152_T1_1mm_brain.nii.gz \
+    -o STRUCT_registered.nii.gz \
+    -t STRUCT_to_MNI_1Warp.nii.gz \
+    -t STRUCT_to_MNI_0GenericAffine.mat
+```
+
+Here, `-r` specifies the reference image, so the resulting image uses the MNI152 image grid.
+
+For a discrete image such as an anatomical segmentation or atlas, use nearest-neighbour interpolation:
+
+```bash
+antsApplyTransforms \
+    -d 3 \
+    -i segmentation.nii.gz \
+    -r ~/fsl/data/standard/MNI152_T1_1mm_brain.nii.gz \
+    -o segmentation_MNI.nii.gz \
+    -n NearestNeighbor \
+    -t STRUCT_to_MNI_1Warp.nii.gz \
+    -t STRUCT_to_MNI_0GenericAffine.mat
+```
+
+Nearest-neighbour interpolation is important for label images because it preserves the original integer label values.
+
+#### 4. Check the Registration
+
+Registration should always be checked visually. Open the MNI152 template together with:
+
+```text
+STRUCT_to_MNI_Warped.nii.gz
+```
+
+in FSLeyes.
+
+Look particularly at the alignment of the outer brain boundary, ventricles and major cortical structures. A successful registration should produce close anatomical correspondence without obviously unrealistic distortions.
+
 ## Segmentation
 
 In this section you will learn to use the main tools for structural analysis: FAST (tissue-type segmentation) and FIRST (sub-cortical structure segmentation). In addition there are several optional extensions, including FSL-VBM (local grey matter volume difference analysis), BIANCA and SIENA, that will be relevant to those with interests in particular types of structural analysis. Here, we only present FAST and FIRST, but everyone is encouraged to do the tutorials [here](https://pages.fmrib.ox.ac.uk/fslcourse/practicals/seg_struc/index.html).
@@ -389,7 +501,7 @@ fslstats structural_brain_roi_pve_1 -M -V
 
 The first number reported by fslstats gives the mean voxel GM PVE across the image ignoring all voxels which are zero. The second is the number of such non-zero voxels and the third number gives the total volume covered by these non-zero voxels in the image (in mm³). Multiplying the first and third numbers together will give the total GM volume in mm³ (for more details on fslstats just type fslstats to see its usage description).
 
-### FIRST
+### FIRST (optional)
 
 In this section we lead you through examples of subcortical structure segmentation with FIRST, and some post-fitting statistical analyses.
 

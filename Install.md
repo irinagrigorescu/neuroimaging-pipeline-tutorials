@@ -2,11 +2,11 @@
 
 ## FSL
 
-Please follow the guide on how to install FSL here: [FSL Installation](https://fsl.fmrib.ox.ac.uk/fsl/docs/install/index.html).
+1. Please follow the guide on how to install FSL here: [FSL Installation](https://fsl.fmrib.ox.ac.uk/fsl/docs/install/index.html).
 
-Restart your terminal.
+2. Restart your terminal.
 
-The data required for the Image Processing tutorial can be installed with the following command:
+3. The data required for the Image Processing tutorial can be installed with the following command:
 
 ```bash
 fsl_add_module "Preparatory material" "Registration" "Structural analysis"
@@ -16,10 +16,14 @@ When prompted for the installation directory, just leave it empty and hit ENTER.
 
 ## Connectome Workbench
 
-Please follow the guide on how to install Connectome Workbench here: [Connectome Workbench Installation](https://www.humanconnectome.org/software/get-connectome-workbench).
+4. Please follow the guide on how to install Connectome Workbench here: [Connectome Workbench Installation](https://www.humanconnectome.org/software/get-connectome-workbench).
 
 ## FSL PALM
 
-As a prerequisite, install Octave: [Octave installation](https://octave.org/download).
+5. As a prerequisite, install Octave: [Octave installation](https://octave.org/download).
 
-To install please visit: [FSL PALM installation](https://fsl.fmrib.ox.ac.uk/fsl/docs/statistics/palm/user_guide.html#downloading-and-installing-palm).
+6. To install please visit: [FSL PALM installation](https://fsl.fmrib.ox.ac.uk/fsl/docs/statistics/palm/user_guide.html#downloading-and-installing-palm).
+
+## ANTs
+
+7. Follow the instructions [here](https://github.com/antsx/ants#installation). We recommend installing the precomiled binaries.
