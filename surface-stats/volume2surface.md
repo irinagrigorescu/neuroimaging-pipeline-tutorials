@@ -86,8 +86,8 @@ This tutorial won't focus on dMRI/fMRI preprocessing, but here are some useful r
 ## What Do We Map from dMRI and fMRI to the Cortical Surface?
 
 From the previous lecture, we already know the advantages of surface-based analysis for studying the cerebral cortex. We can measure cortical macrostructural properties, such as cortical thickness and sulcal depth, directly on the surface. Now, we also want to map **microstructural measures from dMRI** and **functional signals from fMRI** onto the cortical surface.
-- **fMRI:** We usually **directly map the preprocessed BOLD signal** at each time point onto the cortical surface. This gives us a time series of functional signals at each cortical vertex.
-- **dMRI:** It's a little different. Rather than directly mapping raw diffusion-weighted images, we first fit diffusion models to the preprocessed dMRI data to derive quantitative measures that reflect tissue microstructural properties. We then map these diffusion metrics onto the cortical surface.
+- **fMRI:** We usually **directly map the motion and distortion-corrected BOLD signal** at each time point onto the cortical surface. This gives us a time series of functional signals at each cortical vertex.
+- **dMRI:** It's a little different. **Rather than directly mapping the motion and distortion-corrected diffusion-weighted images, we first fit diffusion models to the processed dMRI data to derive quantitative measures** that reflect tissue microstructural properties. We then map these **diffusion metrics** onto the cortical surface.
 
 The figure below shows how we derive diffusion metrics using one of the simplest and most commonly used models: **diffusion tensor imaging (DTI)**. The diffusion tensor model represents water diffusion within each voxel as an ellipsoid. The tensor itself is a **3 × 3 matrix**. 
 
