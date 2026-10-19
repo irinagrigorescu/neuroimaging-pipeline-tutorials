@@ -389,32 +389,20 @@ The major anatomical structures and tissue boundaries should align closely.
 
 The transformations calculated during registration can be reused without repeating the registration.
 
-For example:
-
-```bash
-antsApplyTransforms \
-    -d 3 \
-    -i ~/fsl_course_data/registration/STRUCT_brain.nii.gz \
-    -r ~fsl/data/standard/MNI152_T1_1mm_brain.nii.gz \
-    -o STRUCT_registered.nii.gz \
-    -t STRUCT_to_MNI_1Warp.nii.gz \
-    -t STRUCT_to_MNI_0GenericAffine.mat
-```
-
-Here, `-r` specifies the reference image, so the resulting image uses the MNI152 image grid.
-
 For a discrete image such as an anatomical segmentation or atlas, use nearest-neighbour interpolation:
 
 ```bash
 antsApplyTransforms \
     -d 3 \
-    -i segmentation.nii.gz \
+    -i ../EXAMPLE_REG/example_multiband_reg.feat/reg/LeftHippMaskFuncBin.nii.gz \
     -r ~/fsl/data/standard/MNI152_T1_1mm_brain.nii.gz \
     -o segmentation_MNI.nii.gz \
     -n NearestNeighbor \
     -t STRUCT_to_MNI_1Warp.nii.gz \
     -t STRUCT_to_MNI_0GenericAffine.mat
 ```
+
+Here, `-r` specifies the reference image, so the resulting image uses the MNI152 image grid.
 
 Nearest-neighbour interpolation is important for label images because it preserves the original integer label values.
 
@@ -432,7 +420,7 @@ Look particularly at the alignment of the outer brain boundary, ventricles and m
 
 ## Segmentation
 
-In this section you will learn to use the main tools for structural analysis: FAST (tissue-type segmentation) and FIRST (sub-cortical structure segmentation). In addition there are several optional extensions, including FSL-VBM (local grey matter volume difference analysis), BIANCA and SIENA, that will be relevant to those with interests in particular types of structural analysis. Here, we only present FAST and FIRST, but everyone is encouraged to do the tutorials [here](https://pages.fmrib.ox.ac.uk/fslcourse/practicals/seg_struc/index.html).
+In this section you will learn to use the main tools for structural analysis: FAST (tissue-type segmentation) and FIRST (sub-cortical structure segmentation). In addition there are several optional extensions, including FSL-VBM (local grey matter volume difference analysis), BIANCA and SIENA, that will be relevant to those with interests in particular types of structural analysis. Here, we only present FAST and FIRST (optional), but everyone is encouraged to do the tutorials [here](https://pages.fmrib.ox.ac.uk/fslcourse/practicals/seg_struc/index.html).
 
 ### FAST
 
