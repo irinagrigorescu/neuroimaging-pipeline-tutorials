@@ -13,7 +13,7 @@ This repository contains a collection of practical tutorials, code snippets, and
 
 The course uses several software tools and data that needs to be installed first. Please read our [installation guide](Install.md).
 
-### Volumetric analysis TBD title
+### Volumetric analysis
 Learn the basic image processing tools for volumetric MRI analysis.
 
 [Open the image processing tutorial](./image_processing/imag_proc.md)
