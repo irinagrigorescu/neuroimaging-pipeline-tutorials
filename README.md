@@ -25,10 +25,11 @@ Workbench, and assess reconstruction quality.
 [Open the surfaces tutorial](./surfaces/surfaces.md)
 
 ### Statistical Analysis for Cortical Surfaces
-TBD
+Learn how to achieve surface registration using MSMsulc and assess registration results: [Open the MSMsulc](./surface-stats/MSMsulc_tutorial.md)
 
-[Open the statistical analysis for surfaces tutorial](./surface-stats/surface-stats.md)
+Learn how to project volume (dMRI/fMRI) data to surface using wb_command: [Open the volume2surface](./surface-stats/volume2surface.md)
 
+Learn how to use FSL|PALM to do vertex-wise surface-based statistical analyses: [Open the PALM](./surface-stats/PALM.md)
 
 ---
 
