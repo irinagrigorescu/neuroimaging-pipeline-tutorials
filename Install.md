@@ -20,6 +20,12 @@ When prompted for the installation directory, just leave it empty and hit ENTER.
 update_fsl_package fsl-newmsm
 ```
 
+(Optionally, if ```newmsm -p``` does not work)
+
+```bash
+ln -s $HOME/fsl/bin/newmsm $HOME/fsl/share/fsl/bin/newmsm
+```
+
 ## Connectome Workbench
 
 5. Please follow the guide on how to install Connectome Workbench here: [Connectome Workbench Installation](https://www.humanconnectome.org/software/get-connectome-workbench).
