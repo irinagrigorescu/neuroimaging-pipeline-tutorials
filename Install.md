@@ -9,7 +9,7 @@
 3. The data required for the Image Processing tutorial can be installed with the following command:
 
 ```bash
-fsl_add_module "Preparatory material" "Registration" "Structural analysis"
+~/fsl/bin/fsl_add_module "Preparatory material" "Registration" "Structural analysis"
 ```
 
 When prompted for the installation directory, just leave it empty and hit ENTER. When asked if you want to delete temporary files, select ```y``` to yes.
