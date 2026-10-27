@@ -14,9 +14,9 @@ Let's briefly look at how they differ.
 | **Applications** | Regional brain volume, cortical thickness, surface area, sulcal depth | White matter connectivity, cortical microstructure | functional connectivity |
 | **Preprocessing** | Bias field correction, brain extraction | Bias field correction, brain extraction, **denoising, motion and distortion correction** | Bias field correction, brain extraction, **denoising, motion and distortion correction** |
 
-### Understanding 4D dMRI and fMRI Data
+### Understanding 4D fMRI and dMRI Data
 
-For **dMRI**, the 4th dimension represents different diffusion-weighted measurements, with different diffusion weightings (**b-values**) and gradient directions (**b-vectors**). For **fMRI**, the 4rth dimension represents time, allowing us to track changes in brain signals over time. Let's take a closer look at how dMRI works and what these acquisition parameters mean, as they are essential for dMRI preprocessing. In comparison, fMRI data are more straightforward to understand as a series of brain volumes acquired over time, so we won't go into further detail here.
+For **fMRI**, the 4rth dimension represents **time**, allowing us to track changes in brain signals over time. For **dMRI**, the 4th dimension represents **different diffusion-weighted measurements**, with different diffusion weightings (**b-values**) and gradient directions (**b-vectors**). Let's take a closer look at how dMRI works and what these acquisition parameters mean, as they are essential for dMRI preprocessing. In comparison, fMRI data are more straightforward to understand as a series of brain volumes acquired over time, so we won't go into further detail here.
 
 ![Understanding diffusion MRI](images/volume2surface_dMRI.png)
 
