@@ -3,7 +3,7 @@
 
 ## 1. Brief Introduction to Diffusion and Functional MRI
 
-You're already quite familiar with structural MRI (sMRI), which we mainly use to study brain anatomy and macrostructure. Two other commonly used MRI modalities are diffusion MRI (dMRI) and functional MRI (fMRI). Briefly, dMRI looks at how water molecules move within brain tissue. Because this movement is influenced by tissue microstructure, we can use it to study white matter and cortical microstructural properties. The fMRI is a bit different. It measures changes in blood oxygenation over time, which indirectly reflect neural activity. We can use it to study brain activity and functional connectivity between different brain regions.
+You're already quite familiar with structural MRI (sMRI), which we mainly use to study brain anatomy and macrostructure. Two other commonly used MRI modalities are diffusion MRI (dMRI) and functional MRI (fMRI). Briefly, **dMRI** looks at how water molecules move within brain tissue. Because this movement is influenced by tissue microstructure, we can use it to study **white matter and cortical microstructural properties**. The **fMRI** is a bit different. It measures changes in blood oxygenation over time, which indirectly reflect neural activity. We can use it to study **brain activity and functional connectivity** between different brain regions.
 
 Let's briefly look at how they differ.
 
